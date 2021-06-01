@@ -26,10 +26,10 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/signup', (req, res) => {
-  const Newuser = new User(
+  const newuser = new User(
     req.body.user,
   );
-  Newuser.save()
+  newuser.save()
     .then(() => {
       res.json({
         message: 'New User Details Added!',

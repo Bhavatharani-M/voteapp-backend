@@ -1,13 +1,13 @@
 const express = require('express');
 
 const router = express.Router();
-const Language = require('../model/Language');
+const Candidate = require('../model/Candidate');
 
-router.post('/addCan', (req, res) => {
-  const NewLanguage = new Language(
+router.post('/addCandidate', (req, res) => {
+  const newCandidate = new Candidate(
     req.body.candidate,
   );
-  NewLanguage.save()
+  newCandidate.save()
     .then(() => {
       res.json({
         message: 'New Candidate Added!',
@@ -15,11 +15,11 @@ router.post('/addCan', (req, res) => {
     });
 });
 
-router.get('/can', async (req, res) => {
+router.get('/candidate', async (req, res) => {
   try {
-    const landata = await Language.find({});
-    if (landata) {
-      res.json(landata);
+    const candidateData = await Candidate.find({});
+    if (candidateData) {
+      res.json(candidateData);
     }
   } catch (err) {
     res.json({ message: err });
@@ -28,15 +28,15 @@ router.get('/can', async (req, res) => {
 
 router.put('/addvote/:id', async (req, res) => {
   try {
-    const landata = await Language.findById(req.params.id);
-    if (landata) {
-      const id = landata._id;
-      const updates = { votes: landata.votes + 1 };
+    const candidateData = await Candidate.findById(req.params.id);
+    if (candidateData) {
+      const id = candidateData._id;
+      const updates = { votes: candidateData.votes + 1 };
       const options = {
         new: true,
       };
 
-      Language.findByIdAndUpdate(id, {
+      Candidate.findByIdAndUpdate(id, {
         $set: updates,
       }, options, (err, data) => {
         if (data) {

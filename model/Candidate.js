@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const LanSchema = new mongoose.Schema({
+const canSchema = new mongoose.Schema({
   name: String,
   imgurl: String,
   party: String,
@@ -9,4 +9,4 @@ const LanSchema = new mongoose.Schema({
     default: 0,
   },
 });
-module.exports = mongoose.model('Language', LanSchema);
+module.exports = mongoose.model('Candidate', canSchema);
